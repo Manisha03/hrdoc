@@ -1,0 +1,10 @@
+
+********************************************************************************************************************************************
+Final Query HR:
+
+
+SELECT CONVERT(varchar(10), CONVERT(date, a.AttendanceDate, 120), 103) as AttendanceDate,b.EmployeeName,c.ShiftFName,c.BeginTime as shiftIntime,CONVERT(varchar(5), cast(a.InTime as time(0)), 108) as Intime,CONVERT(varchar(5), cast(a.OutTime as time(0)), 108) as Outtime, case when a.LateBy<c.GraceTime then '00:00'  else CONVERT(varchar(5),(InTime - cast(BeginTime as datetime)), 108)  end as latemark from etimetracklite1.dbo.AttendanceLogs  as a ,etimetracklite1.dbo.Employees as b, etimetracklite1.dbo.Shifts as c where a.EmployeeId=b.EmployeeId and a.ShiftId=c.ShiftId and CONVERT(varchar(10), CONVERT(date, a.AttendanceDate, 120), 120) >= '2018-02-15' and CONVERT(varchar(10),CONVERT(date, a.AttendanceDate, 120), 120) <= '2018-02-19' and c.ShiftFName not like 'NoShift'  order by AttendanceDate,b.EmployeeName
+********************************************************************************************************************************************
+
+
+
